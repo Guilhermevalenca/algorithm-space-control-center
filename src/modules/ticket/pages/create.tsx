@@ -59,18 +59,24 @@ export function CreateTicket() {
       <h1>Adicionar Ticket</h1>
       <CardContent>
        <AppForm onSubmit={submit}>
-        <Box sx={{ mr: "auto" }}>
-          <label>Qual a sua nave?</label>
+        <Stack>
+          <Box sx={{mr: "auto"}}>
+            <label>Qual a sua nave?</label>
+          </Box>
           <SelectSpaceship setSelect={selectSpaceship} />
-        </Box>
-        <Box sx={{ mr: "auto" }}>
-          <label>Qual a prioridade ?</label>
+        </Stack>
+        <Stack>
+          <Box sx={{mr: "auto"}}>
+            <label>Qual é a sua prioridade?</label>
+          </Box>
           <SelectPriority setSelect={setPriority} />
-        </Box>
-        <Box sx={{ mr: "auto" }}>
-          <label>Qual o tipo de problema?</label>
+        </Stack>
+        <Stack>
+          <Box sx={{mr: "auto"}}>
+            <label>Qual o tipo do problema?</label>
+          </Box>
           <SelectTypeProblem setSelect={setTypeProblem} />
-        </Box>
+        </Stack>
         <Stack direction="row" sx={{ ml: "auto" }} spacing={1}>
           <Button variant="outlined" href="/">Cancelar</Button>
           <Button variant="contained" type="submit">Registrar ticket</Button>

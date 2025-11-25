@@ -7,8 +7,12 @@ import { AddCall } from "../components/add-call";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
+import { ShowStatistics } from "../../statistics/components/show-statistics";
+import Accordion from '@mui/material/Accordion';
+import Typography from '@mui/material/Typography';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
 
 export default function Receptionist() {
   const forceUpdate = useForceUpdate();
@@ -27,18 +31,15 @@ export default function Receptionist() {
   });
   return (
     <>
-    <Box>
-      <Box sx={{ ml: "auto" }}>
-      <Button href="/">
-      Voltar
-    </Button>
-    </Box>
     <Card>
       <CardContent>
         <h1>Gestão de chamados</h1>
         <Stack spacing={4}>
           <Stack>
-            <Box sx={{ mr: "auto" }}>
+            <Box>
+              <ShowStatistics/>
+            </Box>
+          <Box sx={{ mr: "auto" }}>
             <p>Quantidade de especialistas no momento: {quantSpecialist}</p>
             </Box>
             <Box sx={{ mr: "auto" }}>
@@ -61,7 +62,6 @@ export default function Receptionist() {
         </Stack>
       </CardContent>
     </Card>
-    </Box>
     </>
   );
 }

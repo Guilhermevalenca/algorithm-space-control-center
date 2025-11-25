@@ -49,19 +49,16 @@ export default function Home() {
 
   return (
     <>
-    <Card>
-    <h1>Bem vindo ao centro de controle espacial</h1>
-      <CardContent>
+    <h1 style={{ textAlign: "left" }}>Bem vindo ao centro de controle espacial!</h1>
+    <p style={{ textAlign: "left" }}>O que deseja fazer?</p>
         <Stack spacing={2}>
-          <Button variant="outlined">
-        <Link to="/spaceship/create">Cadastrar nave</Link>
+          <Button variant="contained" color="primary" href="/spaceship/create">
+        Cadastrar nave
       </Button>
-        <Button variant="outlined">
-        <Link to="/ticket/create">Novo ticket</Link>
+        <Button variant="contained" color="primary" href="/ticket/create">
+        Novo ticket
       </Button>
         </Stack>
-        </CardContent>
-    </Card>
     </>
   );
 }

@@ -43,7 +43,10 @@ export default function CreateSpaceship() {
         <h1>Cadastrar nave</h1>
         <CardContent>
           <AppForm onSubmit={submit}>
-            <Box sx={{ mr: "auto" }}>
+            <Stack>
+              
+            </Stack>
+            <Box>
               <AppInput
                 placeholder="Digite o nome da sua nave..."
                 label="Nome"

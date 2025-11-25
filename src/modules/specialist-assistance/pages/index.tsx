@@ -82,7 +82,7 @@ export default function SpecialistAssistance() {
   return (
     <>
       <Card>
-        <h1>Chamados</h1>
+        <h1>Painel de chamados</h1>
         <CardContent>
           <Box sx={{ width: "100%" }}>
             <Box sx={{ borderBottom: 1, borderColor: "divider" }}>

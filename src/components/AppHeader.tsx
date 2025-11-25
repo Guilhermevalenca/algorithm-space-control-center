@@ -13,13 +13,16 @@ export function AppHeader() {
       <Toolbar>
       <h1>Centro de Controle Espacial</h1>
         <Stack className="toolbar-custom" direction="row" sx={{ ml: "auto" }} spacing={1}>
-        <Button variant="contained" color="secondary" href="/">
+        <Button variant="contained" color="primary" href="/statistics">
+          Estatistícas
+        </Button>
+        <Button variant="contained" color="primary" href="/">
           Tripulante
         </Button>
-        <Button variant="contained" color="secondary" href="/receptionist">
+        <Button variant="contained" color="primary" href="/receptionist">
           Recepcionista
         </Button>
-        <Button variant="contained" color="secondary" href="/specialist-assistance">
+        <Button variant="contained" color="primary" href="/specialist-assistance">
           Especialista
         </Button>
       </Stack>

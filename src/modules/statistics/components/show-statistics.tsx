@@ -1,7 +1,8 @@
-import { Button } from "@mui/material";
+import { Button, Stack } from "@mui/material";
 import database from "../../../plugins/database";
 import { swalPlugin } from "../../../plugins/swal";
 import { useState } from "react";
+import Box from '@mui/material/Box';
 
 export function ShowStatistics() {
   const [statistics] = useState(database.statistics);
@@ -13,23 +14,22 @@ export function ShowStatistics() {
   );
   return (
     <>
-      <p>
+      <p style={{ textAlign: "left" }}>
         Quantidade de chamados diários: {statistics.total_number_request_day}
       </p>
-      <div>
-        <p>Quantidade de chamados por prioridade:</p>
-        <ul>
-          Emergencia:
+      <Stack direction="row" spacing={4}>
+          <Box>
+            🟥 Emergencia:
           {statistics.number_service_requests_by_priority_type.emergency}
-        </ul>
-        <ul>
-          Alta prioridade:
+          </Box>
+          <Box>
+            🟧 Alta prioridade:
           {statistics.number_service_requests_by_priority_type.high_priority}
-        </ul>
-        <ul>
-          Normal: {statistics.number_service_requests_by_priority_type.normal}
-        </ul>
-      </div>
+          </Box>
+          <Box>
+            🟩 Normal: {statistics.number_service_requests_by_priority_type.normal}
+          </Box>
+      </Stack>
       {best_spaceship && (
         <>
           <p>Nome da nave mais chamada: {best_spaceship.spaceship_name}</p>
