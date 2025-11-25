@@ -7,6 +7,8 @@ import type { ReceptionistEntity } from "../entities/receptionist.entity";
 import type { TicketEntity } from "../../ticket/entities/ticket.entity";
 import type { SpaceshipsEntity } from "../../spaceship/entities/spaceship.entity";
 import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
 
 interface IProps {
   receptionist: ReceptionistEntity;
@@ -75,21 +77,23 @@ const Form = ({ ticket, spaceship, submit }: IPropForm) => {
         submit(ticket, spaceship, description);
       }}
     >
-      <h3>Chamado para ser atendido</h3>
+      <Box style={{textAlign: "left"}}>
+        <h3>Chamado para ser atendido</h3>
       <p>Número do ticket: {ticket.number_sequence}</p>
-      <p>nave espacial: {spaceship.name}</p>
+      <p>Nave espacial: {spaceship.name}</p>
       <p>Prioridade: {ticket.priority}</p>
       <p>Tipo de problema Problema: {ticket.type_problem}</p>
-      <div>
-        <label>Descreva seu problema:</label>
+      <Stack spacing={1}>
+        <label>Descrição do problema:</label>
         <textarea
           onChange={(e) => {
             console.log(e.target.value);
             setDescription(String(e.target.value));
           }}
         />
-      </div>
-      <Button type="submit">Registrar chamado</Button>
+      </Stack>
+      </Box>
+      <Button variant="contained" color="primary" type="submit">Registrar chamado</Button>
     </AppForm>
   );
 };
