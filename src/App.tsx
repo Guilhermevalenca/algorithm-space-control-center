@@ -8,8 +8,13 @@ import CreateSpaceship from "./modules/spaceship/pages/create";
 import Ticket from "./modules/ticket/pages";
 import { CreateTicket } from "./modules/ticket/pages/create";
 import Statistics from "./modules/statistics/pages";
+import { useEffect } from "react";
+import database from "./plugins/database";
 
 function App() {
+  useEffect(() => {
+    console.log(database.data);
+  }, []);
   return (
     <Routes>
       <Route element={<DefaultLayout />}>

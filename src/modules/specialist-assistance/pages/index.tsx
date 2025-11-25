@@ -56,7 +56,10 @@ export default function SpecialistAssistance() {
   >([]);
 
   useEffect(() => {
-    if (database.data.specialist_assistances) {
+    if (
+      database.data.specialist_assistances &&
+      database.data.specialist_assistances.length > 0
+    ) {
       setSpecialistAssistanceCom(
         database.data.specialist_assistances.filter(
           (item) => item.specialist === SpecialistEnum.communications

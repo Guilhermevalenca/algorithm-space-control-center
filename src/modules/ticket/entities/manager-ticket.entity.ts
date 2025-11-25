@@ -39,33 +39,35 @@ export class ManagerTicketEntity {
             ticket_number_sequence: ticket.number_sequence,
           });
 
-          let total_number_request_day =
-            database.statistics.total_number_request_day;
-          const spaceships_with_number_calls =
-            database.statistics.spaceships_with_number_calls;
+          setTimeout(() => {
+            let total_number_request_day =
+              database.statistics.total_number_request_day;
+            const spaceships_with_number_calls =
+              database.statistics.spaceships_with_number_calls;
 
-          total_number_request_day++;
+            total_number_request_day++;
 
-          const verify = spaceships_with_number_calls.find(
-            (item) => item.spaceship_name === spaceship.name
-          );
-          if (!verify) {
-            spaceships_with_number_calls.push({
-              spaceship_name: spaceship.name,
-              number_calls: 1,
+            const verify = spaceships_with_number_calls.find(
+              (item) => item.spaceship_name === spaceship.name
+            );
+            if (!verify) {
+              spaceships_with_number_calls.push({
+                spaceship_name: spaceship.name,
+                number_calls: 1,
+              });
+            } else {
+              spaceships_with_number_calls.forEach((item) => {
+                if (item.spaceship_name === spaceship.name) {
+                  item.number_calls++;
+                }
+              });
+            }
+
+            database.updateStatistics({
+              total_number_request_day,
+              spaceships_with_number_calls,
             });
-          } else {
-            spaceships_with_number_calls.forEach((item) => {
-              if (item.spaceship_name === spaceship.name) {
-                item.number_calls++;
-              }
-            });
-          }
-
-          database.updateStatistics({
-            total_number_request_day,
-            spaceships_with_number_calls,
-          });
+          }, 1);
 
           break;
         }
@@ -76,28 +78,41 @@ export class ManagerTicketEntity {
   }
 
   removeTicket(number_sequence: number) {
+    console.log("started");
     if (number_sequence === 0) {
       this.first_ticket = this.first_ticket?.next_ticket ?? null;
       this.total_tickets--;
+      if (this.findTicket === null) {
+        this.total_tickets = 0;
+      }
       return;
-    }
-    const corresponding_ticket: TicketEntity | null =
-      this.findTicket(number_sequence)?.ticket ?? null;
+    } else {
+      const corresponding_ticket: TicketEntity | null =
+        this.findTicket(number_sequence)?.ticket ?? null;
 
-    if (corresponding_ticket) {
-      const previous_ticket: TicketEntity | null =
-        this.findTicket(number_sequence - 1)?.ticket ?? null;
+      if (corresponding_ticket) {
+        const previous_ticket: TicketEntity | null =
+          this.findTicket(number_sequence - 1)?.ticket ?? null;
 
-      if (previous_ticket) {
-        previous_ticket.next_ticket = corresponding_ticket.next_ticket;
+        if (previous_ticket) {
+          previous_ticket.next_ticket = corresponding_ticket.next_ticket;
 
-        this.relation_spaceship_ticket = this.relation_spaceship_ticket.filter(
-          (item) => item.ticket_number_sequence !== number_sequence
-        );
-
-        this.total_tickets--;
+          this.relation_spaceship_ticket =
+            this.relation_spaceship_ticket.filter(
+              (item) => item.ticket_number_sequence !== number_sequence
+            );
+          this.total_tickets--;
+        }
       }
     }
+
+    this.relation_spaceship_ticket = this.relation_spaceship_ticket.filter(
+      (item) => item.ticket_number_sequence !== number_sequence
+    );
+
+    database.data = {
+      manager_tickets: [this],
+    };
   }
 
   findTicket(

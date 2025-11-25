@@ -114,16 +114,17 @@ export class Database {
   }
 
   updateStatistics(partial: Partial<typeof this.statistics>) {
-    this.statistics = {
+    const newStatistics = {
       ...this.statistics,
       ...partial,
     };
 
-    //gambiarra obrigatoria, sem o setTimeout não funciona...
-    setTimeout(() => {
-      const serialized = stringify(this.statistics);
-      localStorage.setItem("statistics", serialized);
-    }, 1);
+    const serialized = stringify(newStatistics);
+    localStorage.setItem("statistics", serialized);
+
+    this.statistics = newStatistics;
+
+    console.log(newStatistics);
   }
 }
 

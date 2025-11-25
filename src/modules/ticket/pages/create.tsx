@@ -9,11 +9,11 @@ import { SelectTypeProblem } from "../components/select-type-problem";
 import { TicketEntity } from "../entities/ticket.entity";
 import type { ManagerTicketEntity } from "../entities/manager-ticket.entity";
 import { useNavigate } from "react-router";
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
 
 export function CreateTicket() {
   const navigate = useNavigate();
@@ -27,6 +27,7 @@ export function CreateTicket() {
       (spaceship) => spaceship.name === name
     );
     if (spaceship) {
+      console.log(spaceship.name);
       setSpaceShip(spaceship);
     }
   }
@@ -55,35 +56,39 @@ export function CreateTicket() {
 
   return (
     <>
-    <Card>
-      <h1>Adicionar Ticket</h1>
-      <CardContent>
-       <AppForm onSubmit={submit}>
-        <Stack>
-          <Box sx={{mr: "auto"}}>
-            <label>Qual a sua nave?</label>
-          </Box>
-          <SelectSpaceship setSelect={selectSpaceship} />
-        </Stack>
-        <Stack>
-          <Box sx={{mr: "auto"}}>
-            <label>Qual é a sua prioridade?</label>
-          </Box>
-          <SelectPriority setSelect={setPriority} />
-        </Stack>
-        <Stack>
-          <Box sx={{mr: "auto"}}>
-            <label>Qual o tipo do problema?</label>
-          </Box>
-          <SelectTypeProblem setSelect={setTypeProblem} />
-        </Stack>
-        <Stack direction="row" sx={{ ml: "auto" }} spacing={1}>
-          <Button variant="outlined" href="/">Cancelar</Button>
-          <Button variant="contained" type="submit">Registrar ticket</Button>
-        </Stack>
-      </AppForm>
-      </CardContent>
-    </Card>
+      <Card>
+        <h1>Adicionar Ticket</h1>
+        <CardContent>
+          <AppForm onSubmit={submit}>
+            <Stack>
+              <Box sx={{ mr: "auto" }}>
+                <label>Qual a sua nave?</label>
+              </Box>
+              <SelectSpaceship setSelect={selectSpaceship} />
+            </Stack>
+            <Stack>
+              <Box sx={{ mr: "auto" }}>
+                <label>Qual é a sua prioridade?</label>
+              </Box>
+              <SelectPriority setSelect={setPriority} />
+            </Stack>
+            <Stack>
+              <Box sx={{ mr: "auto" }}>
+                <label>Qual o tipo do problema?</label>
+              </Box>
+              <SelectTypeProblem setSelect={setTypeProblem} />
+            </Stack>
+            <Stack direction="row" sx={{ ml: "auto" }} spacing={1}>
+              <Button variant="outlined" href="/">
+                Cancelar
+              </Button>
+              <Button variant="contained" type="submit">
+                Registrar ticket
+              </Button>
+            </Stack>
+          </AppForm>
+        </CardContent>
+      </Card>
     </>
   );
 }
