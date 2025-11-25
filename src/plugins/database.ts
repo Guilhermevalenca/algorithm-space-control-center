@@ -24,9 +24,9 @@ type DataType = {
   manager_tickets: ManagerTicketEntity[];
 };
 
-export default new (class {
+export class Database {
   #data: Map<string, string> = new Map();
-  #statistics = {
+  statistics = {
     total_number_request_day: 0,
     number_service_requests_by_priority_type: {
       emergency: 0,
@@ -62,7 +62,9 @@ export default new (class {
 
     const statistics = localStorage.getItem("statistics");
     if (statistics && typeof statistics === "string") {
-      this.#statistics = parse(statistics);
+      this.statistics = parse(statistics);
+    } else {
+      localStorage.setItem("statistics", stringify(this.statistics));
     }
   }
 
@@ -111,14 +113,21 @@ export default new (class {
     localStorage.setItem("data", json_data);
   }
 
-  get statistics() {
-    return this.#statistics;
+  updateStatistics(partial: Partial<typeof this.statistics>) {
+    this.statistics = {
+      ...this.statistics,
+      ...partial,
+    };
+
+    //gambiarra obrigatoria, sem o setTimeout não funciona...
+    setTimeout(() => {
+      const serialized = stringify(this.statistics);
+      localStorage.setItem("statistics", serialized);
+    }, 1);
   }
-  set statistics(value) {
-    this.#statistics = value;
-    localStorage.setItem("statistics", stringify(value));
-  }
-})();
+}
+
+export default new Database();
 
 function reviveClasses(
   obj: any,

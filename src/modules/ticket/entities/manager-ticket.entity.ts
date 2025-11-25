@@ -39,10 +39,32 @@ export class ManagerTicketEntity {
             ticket_number_sequence: ticket.number_sequence,
           });
 
-          database.statistics.total_number_request_day++;
-          database.statistics.spaceships_with_number_calls.push({
-            spaceship_name: spaceship.name,
-            number_calls: 1,
+          let total_number_request_day =
+            database.statistics.total_number_request_day;
+          const spaceships_with_number_calls =
+            database.statistics.spaceships_with_number_calls;
+
+          total_number_request_day++;
+
+          const verify = spaceships_with_number_calls.find(
+            (item) => item.spaceship_name === spaceship.name
+          );
+          if (!verify) {
+            spaceships_with_number_calls.push({
+              spaceship_name: spaceship.name,
+              number_calls: 1,
+            });
+          } else {
+            spaceships_with_number_calls.forEach((item) => {
+              if (item.spaceship_name === spaceship.name) {
+                item.number_calls++;
+              }
+            });
+          }
+
+          database.updateStatistics({
+            total_number_request_day,
+            spaceships_with_number_calls,
           });
 
           break;
