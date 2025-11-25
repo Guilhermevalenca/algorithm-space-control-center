@@ -11,10 +11,10 @@ export function ShowPanel({ specialistAssistances }: IProps) {
       {specialistAssistances.map((item, index) => (
         <div key={index}>
           {item.panel.map((panel, index) => (
-            <div key={index}>
-              <ul>{panel.spaceship_name}</ul>
-              <ul>{panel.mission_code}</ul>
-              <ul>{panel.description}</ul>
+            <div key={index} style={{textAlign: "left"}}>
+              <p>{panel.spaceship_name}</p>
+              <p>{panel.mission_code}</p>
+              <p>{panel.description}</p>
                <Divider />
             </div>
           ))}
