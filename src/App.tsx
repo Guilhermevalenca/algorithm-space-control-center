@@ -5,12 +5,9 @@ import SpecialistAssistance from "./modules/specialist-assistance/pages";
 import Spaceship from "./modules/spaceship/pages";
 import { DefaultLayout } from "./layout/default";
 import CreateSpaceship from "./modules/spaceship/pages/create";
-import database from "./plugins/database";
-import { useEffect } from "react";
-import { ReceptionistEntity } from "./modules/receptionist/entities/receptionist.entity";
-import { ManagerTicketEntity } from "./modules/ticket/entities/manager-ticket.entity";
 import Ticket from "./modules/ticket/pages";
 import { CreateTicket } from "./modules/ticket/pages/create";
+import Statistics from "./modules/statistics/pages";
 
 function App() {
   return (
@@ -30,6 +27,7 @@ function App() {
           <Route index element={<Spaceship />} />
           <Route path="create" element={<CreateSpaceship />} />
         </Route>
+        <Route path="/statistics" element={<Statistics />} />
       </Route>
     </Routes>
   );

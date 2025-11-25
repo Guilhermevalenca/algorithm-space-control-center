@@ -6,7 +6,7 @@ import type { ManagerTicketEntity } from "../../ticket/entities/manager-ticket.e
 import type { ReceptionistEntity } from "../entities/receptionist.entity";
 import type { TicketEntity } from "../../ticket/entities/ticket.entity";
 import type { SpaceshipsEntity } from "../../spaceship/entities/spaceship.entity";
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
 
 interface IProps {
   receptionist: ReceptionistEntity;
@@ -23,6 +23,7 @@ export function AddCall({ receptionist }: IProps) {
     database.data = {
       receptionists: [receptionist],
     };
+    swalPlugin.close();
   }
 
   function showForm() {
@@ -48,7 +49,11 @@ export function AddCall({ receptionist }: IProps) {
     }
   }
 
-  return <Button variant="contained" onClick={showForm}>Atender proximo chamado</Button>;
+  return (
+    <Button variant="contained" onClick={showForm}>
+      Atender proximo chamado
+    </Button>
+  );
 }
 
 interface IPropForm {

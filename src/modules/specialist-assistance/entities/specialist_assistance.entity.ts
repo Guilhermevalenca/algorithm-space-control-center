@@ -8,6 +8,7 @@ export class SpecialistAssistanceEntity {
 
   service_queue: ServiceQueueEntity;
   specialist: SpecialistEnum;
+  tickets_processed: number = 0;
 
   constructor(data: {
     specialist: SpecialistEnum;
@@ -43,6 +44,7 @@ export class SpecialistAssistanceEntity {
   }
 
   resolveCall(call: CallEntity) {
-    // this.service_queue.removeCall(call);
+    this.service_queue.removeCall(call);
+    this.tickets_processed++;
   }
 }

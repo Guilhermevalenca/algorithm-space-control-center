@@ -1,3 +1,4 @@
+import database from "../../../plugins/database";
 import type { SpaceshipsEntity } from "../../spaceship/entities/spaceship.entity";
 import { PriorityEnum } from "../enums/priority.enum";
 import { TicketEntity } from "./ticket.entity";
@@ -36,6 +37,12 @@ export class ManagerTicketEntity {
           this.relation_spaceship_ticket.push({
             spaceship,
             ticket_number_sequence: ticket.number_sequence,
+          });
+
+          database.statistics.total_number_request_day++;
+          database.statistics.spaceships_with_number_calls.push({
+            spaceship_name: spaceship.name,
+            number_calls: 1,
           });
 
           break;

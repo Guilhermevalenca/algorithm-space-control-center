@@ -3,14 +3,8 @@ import { SpecialistAssistanceEntity } from "../entities/specialist_assistance.en
 import database from "../../../plugins/database";
 import { SpecialistEnum } from "../enums/specialist.enum";
 import { ShowPanel } from "../components/show-panel";
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Box from '@mui/material/Box';
-import { Card } from "@mui/material";
-import { CardContent } from "@mui/material";
-
+import { Card, CardContent, Tabs, Tab, Box } from "@mui/material";
+import PropTypes from "prop-types";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -37,12 +31,12 @@ CustomTabPanel.propTypes = {
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
   };
 }
 
 export default function SpecialistAssistance() {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -87,33 +81,38 @@ export default function SpecialistAssistance() {
   }, []);
   return (
     <>
-    <Card>
-      <h1>Chamados</h1>
-      <CardContent>
-        <Box sx={{ width: '100%' }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs value={value} onChange={handleChange} variant="fullWidth" aria-label="basic tabs example">
-          <Tab label="Comunicação" {...a11yProps(0)} />
-          <Tab label="Energia" {...a11yProps(1)} />
-          <Tab label="Suporte à vida" {...a11yProps(2)} />
-          <Tab label="Navegação" {...a11yProps(3)} />
-        </Tabs>
-      </Box>
-      <CustomTabPanel value={value} index={0}>
-        <ShowPanel specialistAssistances={specialistAssistanceCom} />
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={1}>
-        <ShowPanel specialistAssistances={specialistAssistanceEnergy} />
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={2}>
-        <ShowPanel specialistAssistances={specialistAssistanceLife} />
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={3}>
-        <ShowPanel specialistAssistances={specialistAssistanceNav} />
-      </CustomTabPanel>
-    </Box>
-      </CardContent>
-    </Card>
+      <Card>
+        <h1>Chamados</h1>
+        <CardContent>
+          <Box sx={{ width: "100%" }}>
+            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+              <Tabs
+                value={value}
+                onChange={handleChange}
+                variant="fullWidth"
+                aria-label="basic tabs example"
+              >
+                <Tab label="Comunicação" {...a11yProps(0)} />
+                <Tab label="Energia" {...a11yProps(1)} />
+                <Tab label="Suporte à vida" {...a11yProps(2)} />
+                <Tab label="Navegação" {...a11yProps(3)} />
+              </Tabs>
+            </Box>
+            <CustomTabPanel value={value} index={0}>
+              <ShowPanel specialistAssistances={specialistAssistanceCom} />
+            </CustomTabPanel>
+            <CustomTabPanel value={value} index={1}>
+              <ShowPanel specialistAssistances={specialistAssistanceEnergy} />
+            </CustomTabPanel>
+            <CustomTabPanel value={value} index={2}>
+              <ShowPanel specialistAssistances={specialistAssistanceLife} />
+            </CustomTabPanel>
+            <CustomTabPanel value={value} index={3}>
+              <ShowPanel specialistAssistances={specialistAssistanceNav} />
+            </CustomTabPanel>
+          </Box>
+        </CardContent>
+      </Card>
     </>
   );
 }

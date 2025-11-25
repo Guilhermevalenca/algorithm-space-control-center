@@ -26,6 +26,18 @@ type DataType = {
 
 export default new (class {
   #data: Map<string, string> = new Map();
+  #statistics = {
+    total_number_request_day: 0,
+    number_service_requests_by_priority_type: {
+      emergency: 0,
+      high_priority: 0,
+      normal: 0,
+    },
+    spaceships_with_number_calls: [] as {
+      spaceship_name: string;
+      number_calls: number;
+    }[],
+  };
 
   constructor() {
     let data: {
@@ -47,6 +59,11 @@ export default new (class {
       };
     }
     this.#data.set("data", stringify(data));
+
+    const statistics = localStorage.getItem("statistics");
+    if (statistics && typeof statistics === "string") {
+      this.#statistics = parse(statistics);
+    }
   }
 
   get data(): DataType {
@@ -92,6 +109,14 @@ export default new (class {
 
     this.#data.set("data", json_data);
     localStorage.setItem("data", json_data);
+  }
+
+  get statistics() {
+    return this.#statistics;
+  }
+  set statistics(value) {
+    this.#statistics = value;
+    localStorage.setItem("statistics", stringify(value));
   }
 })();
 
