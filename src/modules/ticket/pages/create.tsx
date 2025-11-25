@@ -9,6 +9,11 @@ import { SelectTypeProblem } from "../components/select-type-problem";
 import { TicketEntity } from "../entities/ticket.entity";
 import type { ManagerTicketEntity } from "../entities/manager-ticket.entity";
 import { useNavigate } from "react-router";
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 
 export function CreateTicket() {
   const navigate = useNavigate();
@@ -50,21 +55,29 @@ export function CreateTicket() {
 
   return (
     <>
-      <AppForm onSubmit={submit}>
-        <div>
+    <Card>
+      <h1>Adicionar Ticket</h1>
+      <CardContent>
+       <AppForm onSubmit={submit}>
+        <Box sx={{ mr: "auto" }}>
           <label>Qual a sua nave?</label>
           <SelectSpaceship setSelect={selectSpaceship} />
-        </div>
-        <div>
+        </Box>
+        <Box sx={{ mr: "auto" }}>
           <label>Qual a prioridade ?</label>
           <SelectPriority setSelect={setPriority} />
-        </div>
-        <div>
+        </Box>
+        <Box sx={{ mr: "auto" }}>
           <label>Qual o tipo de problema?</label>
           <SelectTypeProblem setSelect={setTypeProblem} />
-        </div>
-        <AppButton type="submit">Registrar ticket</AppButton>
+        </Box>
+        <Stack direction="row" sx={{ ml: "auto" }} spacing={1}>
+          <Button variant="outlined" href="/">Cancelar</Button>
+          <Button variant="contained" type="submit">Registrar ticket</Button>
+        </Stack>
       </AppForm>
+      </CardContent>
+    </Card>
     </>
   );
 }

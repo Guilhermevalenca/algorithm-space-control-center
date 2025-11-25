@@ -5,6 +5,7 @@ import { swalPlugin } from "../../../plugins/swal";
 import { ReceptionistEntity } from "../entities/receptionist.entity";
 import { SpecialistAssistanceEntity } from "../../specialist-assistance/entities/specialist_assistance.entity";
 import database from "../../../plugins/database";
+import Button from '@mui/material/Button';
 
 interface IProps {
   receptionist: ReceptionistEntity;
@@ -41,9 +42,9 @@ export function AddSpecialistAssistanceInReceptionist({
     });
   }
   return (
-    <AppButton onClick={showForm}>
-      Adicionar especialista a listagem do recepcionista
-    </AppButton>
+    <Button variant="contained" onClick={showForm}>
+      Adicionar especialista
+    </Button>
   );
 }
 

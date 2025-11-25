@@ -6,6 +6,7 @@ import type { ManagerTicketEntity } from "../../ticket/entities/manager-ticket.e
 import type { ReceptionistEntity } from "../entities/receptionist.entity";
 import type { TicketEntity } from "../../ticket/entities/ticket.entity";
 import type { SpaceshipsEntity } from "../../spaceship/entities/spaceship.entity";
+import Button from '@mui/material/Button';
 
 interface IProps {
   receptionist: ReceptionistEntity;
@@ -47,7 +48,7 @@ export function AddCall({ receptionist }: IProps) {
     }
   }
 
-  return <AppButton onClick={showForm}>Atender proximo chamado</AppButton>;
+  return <Button variant="contained" onClick={showForm}>Atender proximo chamado</Button>;
 }
 
 interface IPropForm {
@@ -83,7 +84,7 @@ const Form = ({ ticket, spaceship, submit }: IPropForm) => {
           }}
         />
       </div>
-      <AppButton type="submit">Registrar chamado</AppButton>
+      <Button type="submit">Registrar chamado</Button>
     </AppForm>
   );
 };

@@ -2,6 +2,11 @@ import { useState, type FormEvent } from "react";
 import { AppForm, AppInput, AppButton } from "../../../components";
 import database from "../../../plugins/database";
 import { SpaceshipsEntity } from "../entities/spaceship.entity";
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 
 export default function CreateSpaceship() {
   const [name, setName] = useState("");
@@ -29,20 +34,38 @@ export default function CreateSpaceship() {
 
   return (
     <>
-      <AppForm onSubmit={submit}>
-        <AppInput label="Nome" onChange={(e) => setName(e.target.value)} />
+    <Card>
+      <h1>Cadastrar nave</h1>
+      <CardContent>
+        <AppForm onSubmit={submit}>
+          <Box sx={{mr: "auto"}}>
+            <AppInput
+        placeholder="Digite o nome da sua nave..." 
+        label="Nome"
+        onChange={(e) => setName(e.target.value)}
+        />
         <AppInput
+          placeholder="Digite o código da sua missão..."
           label="Código da missão"
           onChange={(e) => setMissionCode(e.target.value)}
         />
-        <AppInput label="Setor" onChange={(e) => setSector(e.target.value)} />
+        <AppInput
+          placeholder="Digite seu setor atual..."
+          label="Setor" onChange={(e) => setSector(e.target.value)}
+        />
         <AppInput
           label="Quantidade de pessoas"
           onChange={(e) => setQuantityHuman(Number(e.target.value))}
           type="number"
         />
-        <AppButton type="submit">Cadastrar nave espacial</AppButton>
+          </Box>
+          <Stack direction="row" sx={{ ml: "auto" }} spacing={1}>
+            <Button variant="outlined" href="/">Cancelar</Button>
+            <Button variant="contained" type="submit">Cadastrar nave</Button>
+          </Stack>
       </AppForm>
+      </CardContent>
+    </Card>
     </>
   );
 }
